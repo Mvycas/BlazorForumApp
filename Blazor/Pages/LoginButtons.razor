@@ -1,0 +1,37 @@
+﻿@using Blazor.Auth
+@using Blazor.Pages
+@namespace Login
+@inject NavigationManager navMgr
+@inject IAuthService authService
+
+
+<AuthorizeView>
+    <Authorized>
+        <img class="icon" src="/img/icons8-logout-48.png" @onclick="Logout"/>
+    </Authorized>
+    <NotAuthorized>
+        <img class="icon" src="/img/register.png" @onclick="Register" style="margin-right: 40px"/>
+        
+         <img class="icon" src="/img/icons8-login-48.png" @onclick="Login" style="margin-right: 10px"/>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+    private void Login()
+    {
+        navMgr.NavigateTo("/Login");
+    }
+
+    private async Task Logout()
+    {
+        await authService.LogoutAsync();
+        navMgr.NavigateTo("/");
+    }
+
+    private void Register()
+    {
+        navMgr.NavigateTo("/Register");
+    }
+
+}

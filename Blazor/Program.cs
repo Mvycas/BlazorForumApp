@@ -1,7 +1,9 @@
 using Blazor.Auth;
-using Microsoft.AspNetCore.Components;
+using Domain.Contracts;
+using Domain.FileData;
+using JsonDataAccess.Context;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Web;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, AuthServiceProvider>();
+builder.Services.AddScoped<IAuthService, AuthServiceImpl>();
+builder.Services.AddScoped<IUser, InMemoryUserService>();
+builder.Services.AddScoped<JsonContext>();
 
 
 var app = builder.Build();
