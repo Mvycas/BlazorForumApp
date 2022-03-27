@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Domain.Models;
+using Entities.Models;
 
 namespace JsonDataAccess.Context;
 
@@ -7,8 +8,8 @@ public class JsonContext
 {
     private string forumPath = "forum.json";
 
-    private Post? forum;
-    public Post Forum
+    private ForumContainer? forum;
+    public ForumContainer Forum
     {
         get
         {
@@ -36,14 +37,14 @@ public class JsonContext
 
     private void CreateFile()
     {
-        forum = new Post();
+        forum = new ForumContainer();
         Task.FromResult(SaveChangesAsync());
     }
 
     private void LoadData()
     {
         string forumAsJson = File.ReadAllText(forumPath);
-        forum = JsonSerializer.Deserialize<Post>(forumAsJson)!;
+        forum = JsonSerializer.Deserialize<ForumContainer>(forumAsJson)!;
     }
 
     public async Task SaveChangesAsync()

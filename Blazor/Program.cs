@@ -1,4 +1,5 @@
 using Blazor.Auth;
+using Blazor.DAO;
 using Domain.Contracts;
 using Domain.FileData;
 using JsonDataAccess.Context;
@@ -15,6 +16,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, AuthServiceProvider>();
 builder.Services.AddScoped<IAuthService, AuthServiceImpl>();
 builder.Services.AddScoped<IUser, InMemoryUserService>();
 builder.Services.AddScoped<JsonContext>();
+builder.Services.AddScoped<IPost, PostDAO>();
 
 
 var app = builder.Build();

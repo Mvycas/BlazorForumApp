@@ -1,0 +1,60 @@
+﻿@page "/AddPost"
+
+@using Domain.Contracts
+@using Domain.Models
+@using Microsoft.AspNetCore.Components
+
+@inject IPost Post
+@inject NavigationManager NavigationManager
+
+
+<h3>Add New Post</h3>
+<EditForm Model="@newPost" OnValidSubmit="@AddNewPost">
+    <DataAnnotationsValidator/> 
+    <ValidationSummary/>
+    <div class="form-group">
+        <span>
+            <label>Title:</label>
+        </span>
+        <span>
+            <InputTextArea rows="1" @bind-Value="newPost.Header"/>
+        </span>
+        <span>
+            <label>Body:</label>
+        </span>
+        <span>
+            <InputTextArea rows="4" @bind-Value="newPost.Body"/>
+        </span>
+    <p class="actions">
+        <button class="btn btn-outline-dark" type="submit">Create</button>
+    </p>
+    </div>
+</EditForm>
+<label>@_errorLabel</label>
+
+@code {
+    private Post newPost = new Post();
+    private string Author = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+    private string? _errorLabel;
+
+
+    private async Task AddNewPost()
+    {
+        _errorLabel = "";
+        try
+        {
+            newPost.Author = Author;
+            await Post.AddPost(newPost);
+        }
+             catch
+            (Exception e)
+            {
+                _errorLabel = e.Message;
+                return;
+            }
+
+            NavigationManager.NavigateTo("/Posts");
+        }
+    }
+
+}
