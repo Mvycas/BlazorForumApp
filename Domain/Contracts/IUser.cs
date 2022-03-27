@@ -4,6 +4,6 @@ namespace Domain.Contracts;
 
 public interface IUser
 {
-    public Task<User> AddUser(User user);
+    public void AddUser(string username, string password);
     public Task<User> GetUser(string username);
 }

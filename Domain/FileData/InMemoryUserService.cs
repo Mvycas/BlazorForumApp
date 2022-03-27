@@ -6,9 +6,10 @@ namespace Domain.FileData;
 
 public class InMemoryUserService : IUser
 {
-    public async Task<User> AddUser(User user)
+    public void AddUser(string username, string password)
     {
-        throw new NotImplementedException();
+        User user = new User(username, password, "New User", "2");
+        users.Add(user);
     }
     public async Task<User?> GetUser(string username)
     {
