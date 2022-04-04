@@ -30,11 +30,6 @@ public class AuthServiceImpl : IAuthService
 
         OnAuthStateChanged?.Invoke(principal); // notify interested classes in the change of authentication state
     }
-    
-    public async Task RegisterAsync(string username, string password)
-    {
-        userService.AddUser(username, password);
-    }
 
     public async Task LogoutAsync()
     {

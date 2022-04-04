@@ -8,7 +8,7 @@
 @inject NavigationManager NavigationManager
 
 
-<h3>Add New Post</h3>
+<h3>ADD NEW POST</h3>
 <EditForm Model="@newPost" OnValidSubmit="@AddNewPost">
     <DataAnnotationsValidator/> 
     <ValidationSummary/>
@@ -16,17 +16,17 @@
         <span>
             <label>Title:</label>
         </span>
-        <span>
+        <span class="field">
             <InputTextArea rows="1" @bind-Value="newPost.Header"/>
         </span>
         <span>
             <label>Body:</label>
         </span>
-        <span>
+        <span class="field">
             <InputTextArea rows="4" @bind-Value="newPost.Body"/>
         </span>
     <p class="actions">
-        <button class="btn btn-outline-dark" type="submit">Create</button>
+        <button class="btn btn-outline-dark" type="submit" style="margin-top: 10px">Create</button>
     </p>
     </div>
 </EditForm>
@@ -55,6 +55,5 @@
 
             NavigationManager.NavigateTo("/Posts");
         }
-    }
 
 }

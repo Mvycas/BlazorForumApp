@@ -1,8 +1,11 @@
 ﻿@page "/Login"
 
 @using Blazor.Auth
+@using Domain.Models
 @inject IAuthService authService
 @inject NavigationManager navMgr
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 
 <AuthorizeView>
@@ -32,7 +35,7 @@
     </NotAuthorized>
     <Authorized>
         <div class="card">
-            <h3>Hello, @context.User.Identity.Name</h3>
+            <h3>Hello, @userName</h3>
         </div>
     </Authorized>
 </AuthorizeView>

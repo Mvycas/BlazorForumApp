@@ -1,13 +1,10 @@
 ﻿@page "/Register"
 @using Domain.Models
 @using Domain.Contracts
-@using Blazor.Auth
 
 
 @inject IUser _userService;
-@inject IAuthService authService;
-@inject NavigationManager NavigationManager
-@inject NavigationManager navMgr
+@inject NavigationManager navigationManager
 
 <AuthorizeView>
     <NotAuthorized>
@@ -15,11 +12,11 @@
             <h3>Register user</h3>
             <div class="field">
                 <label>User name:</label>
-                <input type="text" @bind="userName"/>
+                <input type="text" @bind="user.UserName"/>
             </div>
             <div class="field">
                 <label style="text-align: center">Password:</label>
-                <input type="password" @bind="password"/>
+                <input type="password" @bind="user.Password"/>
             </div>
             @if (!string.IsNullOrEmpty(errorLabel))
                         {
@@ -30,7 +27,7 @@
                             </div>
                         }
             <div class="field">
-                <button class="loginbtn" @onclick="RegisterAsync">Register</button>
+                <button class="registerBtn" @onclick="RegisterAsync">Register</button>
             </div>
         </div>
         
@@ -39,17 +36,18 @@
 </AuthorizeView>
 
 @code {
-    private string userName;
-    private string password;
-    private string errorLabel;
+    private User user = new User();
+    private String? errorLabel;
 
     private async Task RegisterAsync()
     {
-        errorLabel = "";
+       
         try
         {
-            await authService.RegisterAsync(userName, password);
-            navMgr.NavigateTo("/Login");
+            user.Role = "NewUser";
+            user.SecurityLevel = "2";
+            await _userService.AddUser(user);
+            navigationManager.NavigateTo("/Login");
         }
         catch (Exception e)
         {

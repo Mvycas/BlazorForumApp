@@ -5,12 +5,12 @@ using JsonDataAccess.Context;
 
 namespace Blazor.DAO;
 
-public class PostDAO : IPost
+public class DataDAO : IUser, IPost 
 {
 
     private JsonContext fileContext;
 
-    public PostDAO(JsonContext jsonContext)
+    public DataDAO(JsonContext jsonContext)
     {
         fileContext = jsonContext;
     }
@@ -40,5 +40,24 @@ public class PostDAO : IPost
     public Task UpdatePost(Post post)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<User> AddUser(User user)
+    {
+        if (fileContext.Forum.Users.Any(t => t.UserName.Equals(user.UserName)))
+        {
+            throw new Exception("User is already registered!");
+        }
+        else
+        {
+            fileContext.Forum.Users.Add(user);
+            await fileContext.SaveChangesAsync();
+            return user;
+        }
+    }
+
+    public async Task<User> GetUser(string username)
+    {
+        return fileContext.Forum.Users.First(t => t.UserName.Equals(username));
     }
 }
