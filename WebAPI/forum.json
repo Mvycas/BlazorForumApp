@@ -1,0 +1,49 @@
+{
+  "Users": [
+    {
+      "UserName": "admin",
+      "Password": "admin",
+      "Role": "Admin",
+      "SecurityLevel": "1"
+    },
+    {
+      "UserName": "marty",
+      "Password": "party",
+      "Role": "FriendlyUser",
+      "SecurityLevel": "2"
+    },
+    {
+      "UserName": "gg",
+      "Password": "suk",
+      "Role": "NewUser",
+      "SecurityLevel": "2"
+    }
+  ],
+  "Posts": [
+    {
+      "Header": "Hello world",
+      "Body": "This is a test post made by admin, just to see if the functionality is working.",
+      "Author": "Admin"
+    },
+    {
+      "Header": "JIK",
+      "Body": "BJK",
+      "Author": ""
+    },
+    {
+      "Header": "hello",
+      "Body": "maxc",
+      "Author": "DESKTOP-HJ5HOLE\\Martynas"
+    },
+    {
+      "Header": "asdfasd",
+      "Body": "sadsadsa",
+      "Author": "Martynas"
+    },
+    {
+      "Header": "GHG",
+      "Body": "HGH",
+      "Author": ""
+    }
+  ]
+}

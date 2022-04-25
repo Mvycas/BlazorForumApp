@@ -13,7 +13,6 @@ public class Post
     
     public Post()
     {
-     
         Header = string.Empty;
         Body = string.Empty;
         Author = string.Empty;

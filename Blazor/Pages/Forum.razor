@@ -1,0 +1,42 @@
+﻿@page "/Posts"
+@using Domain.Models
+@using Domain.Contracts
+@inject IPost PostService
+
+<h3>Forum</h3>
+
+@if (posts == null)
+{
+  <p>
+    <em>Loading...</em>
+  </p>
+}
+else if (!posts.Any())
+{
+  <p>
+    <em>No Post items exist. Please add some.</em>
+  </p>
+}
+else
+{
+        
+  @foreach (var item in posts)
+  {
+    <h1 class="title">@item.Header</h1>
+      <h5 class="author">Author: @item.Author</h5>
+      <p class="text">@item.Body</p>
+  
+                
+  }
+            
+}
+
+@code {
+  private ICollection<Post> posts;
+    
+  protected override async Task OnInitializedAsync()
+  {
+    posts = await PostService.GetPosts();
+  }
+
+}

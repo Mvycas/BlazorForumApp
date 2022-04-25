@@ -3,6 +3,8 @@
 @using Domain.Contracts
 @using Domain.Models
 @using Microsoft.AspNetCore.Components
+@using Blazor.Auth
+@using System.Security.Claims
 
 @inject IPost Post
 @inject NavigationManager NavigationManager
@@ -34,16 +36,14 @@
 
 @code {
     private Post newPost = new Post();
-    private string Author = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
     private string? _errorLabel;
-
 
     private async Task AddNewPost()
     {
         _errorLabel = "";
         try
         {
-            newPost.Author = Author;
+            //newPost.Author = _author;
             await Post.AddPost(newPost);
         }
              catch
